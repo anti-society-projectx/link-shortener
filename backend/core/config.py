@@ -49,6 +49,15 @@ class FastapiConfig(BaseModel):
     workers: int = 1
 
 
+class ApiPrefix(BaseModel):
+    """
+    Префиксы для маршрутов API.
+    """
+    prefix: str = "/api"
+    version: str = "/v1"
+    users: str = "/users"
+    links: str = "/links"
+
 class Setting(BaseSettings):
     """
     Главный конфигурационный класс приложения.
@@ -61,3 +70,7 @@ class Setting(BaseSettings):
     )
     db: DbConfig
     fastapi: FastapiConfig = FastapiConfig()
+    api: ApiPrefix = ApiPrefix()
+
+
+settings = Setting()

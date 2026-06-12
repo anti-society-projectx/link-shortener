@@ -16,7 +16,7 @@ class Link(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
 
     url: Mapped[str] = mapped_column(index=True)
-    short_code: Mapped[str] = mapped_column(String(8), index=True)
+    short_code: Mapped[str] = mapped_column(String(8), index=True, unique=True)
 
     active: Mapped[bool] = mapped_column(default=True)
 

@@ -1,7 +1,7 @@
 import datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, String, Text
+from sqlalchemy import ForeignKey, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.models import Base
@@ -18,7 +18,7 @@ class LinkClick(Base):
         index=True
     )
 
-    clicked_at: Mapped[datetime.datetime] = mapped_column(index=True)
+    clicked_at: Mapped[datetime.datetime] = mapped_column(index=True, server_default=func.now())
 
     country_code: Mapped[str | None] = mapped_column(String(3), nullable=True, index=True)
     city: Mapped[str | None] = mapped_column(String(100), nullable=True)
@@ -26,8 +26,6 @@ class LinkClick(Base):
     os: Mapped[str | None] = mapped_column(String(50), nullable=True)
     device_type: Mapped[str | None] = mapped_column(String(20), nullable=True)
     browser: Mapped[str | None] = mapped_column(String(50), nullable=True)
-
-    referrer_address: Mapped[str | None] = mapped_column(Text, default=None, index=True)
 
     link: Mapped["Link"] = relationship(
         "Link",

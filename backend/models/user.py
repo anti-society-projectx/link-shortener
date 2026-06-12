@@ -15,8 +15,6 @@ class User(Base):
     """
     tg_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
 
-    username: Mapped[str | None] = mapped_column(unique=True, index=True)
-
     links: Mapped[list["Link"]] = relationship(
         "Link",
         back_populates="user",
